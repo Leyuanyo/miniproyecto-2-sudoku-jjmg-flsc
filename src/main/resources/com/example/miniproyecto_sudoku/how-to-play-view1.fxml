@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #1C1D21;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.miniproyecto_escritura_rapida.controller.HowToPlayController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="197.0" layoutY="14.0" text="¿Cómo Jugar?" textAlignment="CENTER" textFill="#f4fff8">
+         <font>
+            <Font name="Berlin Sans FB" size="36.0" />
+         </font>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Label>
+      <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="41.0" layoutY="83.0" prefHeight="225.0" prefWidth="518.0" text="1. Aparece una palabra en pantalla. ¡Léela bien!&#10;2. Escríbela EXACTAMENTE igual en el cuadro de texto.   (respeta mayúsculas, tildes y espacios)&#10;3. Presiona ENTER o el botón Validar antes de que el tiempo se acabe.&#10;4. ✅ Acertaste → subes de nivel y aparece una nueva palabra.&#10;5. ❌ Se acabó el tiempo → el juego termina.⏱ Tiempo por nivel: empieza en 20 segundos.   Cada 5 niveles correctos, el tiempo baja 2 segundos (mínimo 2s).&#10;¡El objetivo es llegar al nivel más alto posible!&#10;" textFill="#f4fff8" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="135.0" layoutY="296.0" prefHeight="73.0" prefWidth="330.0" text="— Presiona ESC para volver al menú —" textAlignment="CENTER" textFill="#f4fff8" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+         <effect>
+            <Glow level="1.0" />
+         </effect>
+      </Label>
+   </children>
+</AnchorPane>
