@@ -48,7 +48,22 @@ public class SudokuValidator implements ISudokuValidator {
 
     @Override
     public boolean isMoveValid(int row, int col, int value) {
-        return false;
+        if (value < 1 || value > SudokuBoard.SIZE) return false;
+        if (board.isFixed(row, col)) return false;
+
+        SudokuBoard concreteBoard = (SudokuBoard) board;
+        int previous = board.getCell(row, col);
+        concreteBoard.setCell(row, col, value);
+
+        boolean valid = isRowValid(row)
+                && isColumnValid(col)
+                && isBlockValid(row, col);
+
+        concreteBoard.setCell(row, col, previous);
+        concreteBoard.undoLastMove();
+        concreteBoard.undoLastMove();
+
+        return valid;
     }
 
     @Override
