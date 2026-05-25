@@ -1,4 +1,4 @@
-package com.example.miniproyecto_sudoku.model;
+package com.example.miniproyecto_sudoku.model.board;
 
 public interface ISudokuBoardState {
     int[][] getGrid();

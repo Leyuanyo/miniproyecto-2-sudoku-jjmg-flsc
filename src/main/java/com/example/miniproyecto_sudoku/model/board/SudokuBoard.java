@@ -1,4 +1,7 @@
-package com.example.miniproyecto_sudoku.model;
+package com.example.miniproyecto_sudoku.model.board;
+
+import com.example.miniproyecto_sudoku.model.SudokuGameState;
+import com.example.miniproyecto_sudoku.model.move.SudokuMove;
 
 import java.io.Serializable;
 import java.util.ArrayDeque;

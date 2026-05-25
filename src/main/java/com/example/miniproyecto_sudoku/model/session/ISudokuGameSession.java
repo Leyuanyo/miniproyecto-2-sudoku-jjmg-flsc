@@ -1,4 +1,6 @@
-package com.example.miniproyecto_sudoku.model;
+package com.example.miniproyecto_sudoku.model.session;
+
+import com.example.miniproyecto_sudoku.model.board.SudokuBoard;
 
 public interface ISudokuGameSession {
 

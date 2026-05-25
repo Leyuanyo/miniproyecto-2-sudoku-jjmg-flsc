@@ -1,4 +1,8 @@
-package com.example.miniproyecto_sudoku.model;
+package com.example.miniproyecto_sudoku.model.validator;
+
+import com.example.miniproyecto_sudoku.model.SudokuGameState;
+import com.example.miniproyecto_sudoku.model.board.ISudokuBoard;
+import com.example.miniproyecto_sudoku.model.board.SudokuBoard;
 
 import java.util.HashSet;
 import java.util.Set;

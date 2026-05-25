@@ -1,4 +1,8 @@
-package com.example.miniproyecto_sudoku.model;
+package com.example.miniproyecto_sudoku.model.generator;
+
+import com.example.miniproyecto_sudoku.model.board.ISudokuBoardState;
+import com.example.miniproyecto_sudoku.model.board.SudokuBoard;
+import com.example.miniproyecto_sudoku.model.board.SudokuBoardState;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

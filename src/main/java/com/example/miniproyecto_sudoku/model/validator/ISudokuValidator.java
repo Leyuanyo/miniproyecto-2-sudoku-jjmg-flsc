@@ -1,4 +1,4 @@
-package com.example.miniproyecto_sudoku.model;
+package com.example.miniproyecto_sudoku.model.validator;
 
 public interface ISudokuValidator {
     boolean isMoveValid(int row, int col, int value);

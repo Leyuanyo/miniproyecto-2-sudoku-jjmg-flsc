@@ -1,4 +1,4 @@
-package com.example.miniproyecto_sudoku.model;
+package com.example.miniproyecto_sudoku.model.move;
 
 import java.io.Serializable;
 
