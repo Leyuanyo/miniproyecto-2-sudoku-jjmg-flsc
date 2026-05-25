@@ -1,9 +1,6 @@
 package com.example.miniproyecto_sudoku.model;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 
 public class SudokuGameSession implements ISudokuGameSession {
 
@@ -21,7 +18,12 @@ public class SudokuGameSession implements ISudokuGameSession {
 
     @Override
     public SudokuBoard loadSession() {
-        return null;
+        try (ObjectInputStream ois = new ObjectInputStream(
+                new FileInputStream(SESSION_FILE))) {
+            return (SudokuBoard) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            return null;
+        }
     }
 
     @Override
