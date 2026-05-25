@@ -1,6 +1,10 @@
 package com.example.miniproyecto_sudoku.model;
 
-public class SudokuMove {
+import java.io.Serializable;
+
+public class SudokuMove implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private final int row;
     private final int col;
