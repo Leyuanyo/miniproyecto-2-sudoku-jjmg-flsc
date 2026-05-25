@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2C2416;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.miniproyecto_sudoku.controller.HowToPlayController">
+   <children>
+      <Rectangle arcHeight="100.0" arcWidth="100.0" fill="#f5edd6" height="358.0" layoutX="8.0" layoutY="19.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" width="583.0" />
+      <Label fx:id="howToPlayLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="196.0" layoutY="41.0" text="¿Cómo Jugar?" textAlignment="CENTER" textFill="#7b4f2e">
+         <font>
+            <Font name="Berlin Sans FB" size="36.0" />
+         </font>
+      </Label>
+      <Label fx:id="howToPlayExitLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="134.0" layoutY="303.0" prefHeight="73.0" prefWidth="330.0" text="— Presiona ESC para volver al menú —" textAlignment="CENTER" textFill="#7b4f2e" wrapText="true">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="howToPlayTextArea" cache="true" depthTest="DISABLE" editable="false" layoutX="12.0" layoutY="107.0" prefHeight="200.0" prefWidth="575.0" style="-fx-border-color: #f5edd6; -fx-font-style: #7b4f2e;" text="El tablero tiene 6 filas, 6 columnas y 6 bloques de 2×3. Tu objetivo es rellenar todas las celdas &#10;vacías con números del 1 al 6.&#10;Reglas:&#10;&#10;Cada número del 1 al 6 debe aparecer exactamente una vez en cada fila.&#10;Cada número del 1 al 6 debe aparecer exactamente una vez en cada columna.&#10;Cada número del 1 al 6 debe aparecer exactamente una vez en cada bloque de 2×3.&#10;&#10;Controles:&#10;&#10;Haz clic en una celda vacía para seleccionarla.&#10;Presiona una tecla del 1 al 6 para ingresar un número.&#10;Presiona Suprimir o Retroceso para borrar un número ingresado.&#10;&#10;Indicadores visuales:&#10;&#10;Los números en café oscuro son fijos y no se pueden modificar.&#10;Si ingresas un número incorrecto, la celda se marcará en rojo.&#10;Los números sugeridos por la ayuda aparecen en verde.&#10;&#10;Botones:&#10;&#10;Ayuda — sugiere un número válido para una celda vacía. Usala las veces que quieras.&#10;Nuevo juego — genera un tablero nuevo aleatorio.&#10;Menú principal — regresa al menú principal.&#10;&#10;Ganas cuando todas las celdas estén correctamente completadas. ¡Buena suerte!">
+         <font>
+            <Font name="Berlin Sans FB" size="14.0" />
+         </font></TextArea>
+   </children>
+</AnchorPane>
