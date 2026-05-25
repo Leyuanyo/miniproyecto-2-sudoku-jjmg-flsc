@@ -63,7 +63,26 @@ public class SudokuBoardGenerator implements ISudokuBoardGenerator {
     }
 
     private List<Integer> getShuffledCandidates(int[][] grid, int row, int col) {
-        return new ArrayList<>();
+        boolean[] used = new boolean[SIZE + 1];
+
+        for (int c = 0; c < SIZE; c++) used[grid[row][c]] = true;
+        for (int r = 0; r < SIZE; r++) used[grid[r][col]] = true;
+
+        int blockRowStart = (row / BLOCK_ROWS) * BLOCK_ROWS;
+        int blockColStart = (col / BLOCK_COLS) * BLOCK_COLS;
+        for (int r = blockRowStart; r < blockRowStart + BLOCK_ROWS; r++) {
+            for (int c = blockColStart; c < blockColStart + BLOCK_COLS; c++) {
+                used[grid[r][c]] = true;
+            }
+        }
+
+        List<Integer> candidates = new ArrayList<>();
+        for (int num = 1; num <= SIZE; num++) {
+            if (!used[num]) candidates.add(num);
+        }
+
+        Collections.shuffle(candidates);
+        return candidates;
     }
 
     private void placeFixedCells(SudokuBoard board, int[][] solvedGrid) {
