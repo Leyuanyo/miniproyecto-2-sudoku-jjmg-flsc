@@ -68,6 +68,43 @@ public class SudokuValidator implements ISudokuValidator {
 
     @Override
     public boolean isBoardComplete() {
-        return false;
+        for (int row = 0; row < SudokuBoard.SIZE; row++) {
+            for (int col = 0; col < SudokuBoard.SIZE; col++) {
+                if (board.getCell(row, col) == 0) return false;
+            }
+        }
+        for (int i = 0; i < SudokuBoard.SIZE; i++) {
+            if (!isRowValid(i) || !isColumnValid(i)) return false;
+        }
+        for (int blockRow = 0; blockRow < SudokuBoard.SIZE / SudokuBoard.BLOCK_ROWS; blockRow++) {
+            for (int blockCol = 0; blockCol < SudokuBoard.SIZE / SudokuBoard.BLOCK_COLS; blockCol++) {
+                if (!isBlockValid(
+                        blockRow * SudokuBoard.BLOCK_ROWS,
+                        blockCol * SudokuBoard.BLOCK_COLS)) return false;
+            }
+        }
+        return true;
+    }
+
+    public SudokuGameState evaluateGameState() {
+        if (isBoardComplete()) {
+            board.setGameState(SudokuGameState.COMPLETED);
+            return SudokuGameState.COMPLETED;
+        }
+        for (int row = 0; row < SudokuBoard.SIZE; row++) {
+            for (int col = 0; col < SudokuBoard.SIZE; col++) {
+                int value = board.getCell(row, col);
+                if (value != 0) {
+                    if (!isRowValid(row)
+                            || !isColumnValid(col)
+                            || !isBlockValid(row, col)) {
+                        board.setGameState(SudokuGameState.INVALID);
+                        return SudokuGameState.INVALID;
+                    }
+                }
+            }
+        }
+        board.setGameState(SudokuGameState.IN_PROGRESS);
+        return SudokuGameState.IN_PROGRESS;
     }
 }
