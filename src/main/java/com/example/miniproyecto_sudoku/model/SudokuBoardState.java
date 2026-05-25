@@ -1,6 +1,10 @@
 package com.example.miniproyecto_sudoku.model;
 
-public class SudokuBoardState implements ISudokuBoardState {
+import java.io.Serializable;
+
+public class SudokuBoardState implements ISudokuBoardState, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     private final int[][] grid;
     private final int position;
