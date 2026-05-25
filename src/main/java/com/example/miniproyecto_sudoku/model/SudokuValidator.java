@@ -1,0 +1,58 @@
+package com.example.miniproyecto_sudoku.model;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class SudokuValidator implements ISudokuValidator {
+
+    private final ISudokuBoard board;
+
+    public SudokuValidator(ISudokuBoard board) {
+        this.board = board;
+    }
+
+    @Override
+    public boolean isRowValid(int row) {
+        Set<Integer> seen = new HashSet<>();
+        for (int col = 0; col < SudokuBoard.SIZE; col++) {
+            int value = board.getCell(row, col);
+            if (value != 0 && !seen.add(value)) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isColumnValid(int col) {
+        Set<Integer> seen = new HashSet<>();
+        for (int row = 0; row < SudokuBoard.SIZE; row++) {
+            int value = board.getCell(row, col);
+            if (value != 0 && !seen.add(value)) return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isBlockValid(int row, int col) {
+        Set<Integer> seen = new HashSet<>();
+        int blockRowStart = (row / SudokuBoard.BLOCK_ROWS) * SudokuBoard.BLOCK_ROWS;
+        int blockColStart = (col / SudokuBoard.BLOCK_COLS) * SudokuBoard.BLOCK_COLS;
+
+        for (int r = blockRowStart; r < blockRowStart + SudokuBoard.BLOCK_ROWS; r++) {
+            for (int c = blockColStart; c < blockColStart + SudokuBoard.BLOCK_COLS; c++) {
+                int value = board.getCell(r, c);
+                if (value != 0 && !seen.add(value)) return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean isMoveValid(int row, int col, int value) {
+        return false;
+    }
+
+    @Override
+    public boolean isBoardComplete() {
+        return false;
+    }
+}
