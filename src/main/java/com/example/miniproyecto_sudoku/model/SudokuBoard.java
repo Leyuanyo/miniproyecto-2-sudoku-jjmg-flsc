@@ -1,9 +1,12 @@
 package com.example.miniproyecto_sudoku.model;
 
+import java.io.Serializable;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
-public class SudokuBoard implements ISudokuBoard {
+public class SudokuBoard implements ISudokuBoard, Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     public static final int SIZE = 6;
     public static final int BLOCK_ROWS = 2;
