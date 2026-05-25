@@ -86,5 +86,27 @@ public class SudokuBoardGenerator implements ISudokuBoardGenerator {
     }
 
     private void placeFixedCells(SudokuBoard board, int[][] solvedGrid) {
+        for (int blockRow = 0; blockRow < SIZE / BLOCK_ROWS; blockRow++) {
+            for (int blockCol = 0; blockCol < SIZE / BLOCK_COLS; blockCol++) {
+
+                List<int[]> cellsInBlock = new ArrayList<>();
+                int rowStart = blockRow * BLOCK_ROWS;
+                int colStart = blockCol * BLOCK_COLS;
+
+                for (int r = rowStart; r < rowStart + BLOCK_ROWS; r++) {
+                    for (int c = colStart; c < colStart + BLOCK_COLS; c++) {
+                        cellsInBlock.add(new int[]{r, c});
+                    }
+                }
+
+                Collections.shuffle(cellsInBlock);
+
+                for (int i = 0; i < FIXED_PER_BLOCK; i++) {
+                    int r = cellsInBlock.get(i)[0];
+                    int c = cellsInBlock.get(i)[1];
+                    board.setFixed(r, c, solvedGrid[r][c]);
+                }
+            }
+        }
     }
 }
