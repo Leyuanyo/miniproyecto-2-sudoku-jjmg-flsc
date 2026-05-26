@@ -109,6 +109,14 @@ public class GameController {
                     final int r = row;
                     final int c = col;
                     tf.setEditable(false);
+                    tf.textProperty().addListener((observable, oldValue, newValue) -> {
+                        if (newValue.length() > 1) {
+                            tf.setText(oldValue);
+                        }
+                        if (!newValue.matches("[1-6]?")) {
+                            tf.setText(oldValue);
+                        }
+                    });
                     tf.setOnMouseClicked(event -> {
                         selectedRow = r;
                         selectedCol = c;
