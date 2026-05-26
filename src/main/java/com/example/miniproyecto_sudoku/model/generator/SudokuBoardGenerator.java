@@ -21,6 +21,7 @@ public class SudokuBoardGenerator implements ISudokuBoardGenerator {
     public SudokuBoard generateBoard() {
         int[][] solvedGrid = buildSolvedGrid();
         SudokuBoard board = new SudokuBoard();
+        board.setSolution(solvedGrid);
         placeFixedCells(board, solvedGrid);
         return board;
     }

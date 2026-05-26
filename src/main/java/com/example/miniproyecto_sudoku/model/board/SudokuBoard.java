@@ -19,6 +19,7 @@ public class SudokuBoard implements ISudokuBoard, Serializable {
     private final boolean[][] fixed;
     private final Deque<SudokuMove> moveHistory;
     private SudokuGameState gameState;
+    private int[][] solution;
 
     public SudokuBoard() {
         this.grid = new int[SIZE][SIZE];
@@ -79,6 +80,14 @@ public class SudokuBoard implements ISudokuBoard, Serializable {
             }
         }
         this.gameState = SudokuGameState.IN_PROGRESS;
+    }
+
+    public void setSolution(int[][] solution) {
+        this.solution = solution;
+    }
+
+    public int getSolutionValue(int row, int col) {
+        return solution[row][col];
     }
 
     @Override
