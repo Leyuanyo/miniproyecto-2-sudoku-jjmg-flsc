@@ -56,14 +56,8 @@ public class GameController {
 
     @FXML
     public void initialize() {
-        board = boardGenerator.generateBoard();
-        validator = new SudokuValidator(board);
         keyAdapter.setOnInput(this::processInput);
         keyAdapter.setOnClear(this::processClear);
-        GameStage.getPrimaryStage()
-                .getScene()
-                .setOnKeyPressed(keyAdapter);
-        buildBoard();
     }
 
     @FXML
@@ -153,6 +147,11 @@ public class GameController {
                     final int r = row;
                     final int c = col;
                     tf.setEditable(false);
+
+                    if (board.getCell(row, col) != 0) {
+                        tf.setText(String.valueOf(board.getCell(row, col)));
+                    }
+
                     tf.textProperty().addListener((observable, oldValue, newValue) -> {
                         if (newValue.length() > 1) {
                             tf.setText(oldValue);
@@ -237,6 +236,12 @@ public class GameController {
             gameSession.clearSession();
             GameStage.loadScene("win-view.fxml");
         }
+    }
+
+    public void startNewGame() {
+        board = boardGenerator.generateBoard();
+        validator = new SudokuValidator(board);
+        buildBoard();
     }
 
     public void loadSession(SudokuBoard savedBoard) {

@@ -41,7 +41,8 @@ public class MainMenuController {
             );
             Parent root = loader.load();
             GameController controller = loader.getController();
-            controller.loadSession(gameSession.loadSession());
+            SudokuBoard savedBoard = gameSession.loadSession();
+            controller.loadSession(savedBoard);
             GameStage.getPrimaryStage().setScene(new Scene(root));
             GameStage.getPrimaryStage().show();
         } catch (IOException e) {
@@ -56,7 +57,20 @@ public class MainMenuController {
 
     @FXML
     void handlePlay(ActionEvent event) {
-        gameSession.clearSession();
-        GameStage.loadScene("game-view.fxml");
+        try {
+            gameSession.clearSession();
+            FXMLLoader loader = new FXMLLoader(
+                    GameStage.class.getResource(
+                            "/com/example/miniproyecto_sudoku/game-view.fxml"
+                    )
+            );
+            Parent root = loader.load();
+            GameController controller = loader.getController();
+            controller.startNewGame();
+            GameStage.getPrimaryStage().setScene(new Scene(root));
+            GameStage.getPrimaryStage().show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

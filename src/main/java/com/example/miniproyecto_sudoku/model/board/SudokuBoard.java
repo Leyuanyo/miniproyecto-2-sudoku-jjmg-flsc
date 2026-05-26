@@ -4,7 +4,7 @@ import com.example.miniproyecto_sudoku.model.SudokuGameState;
 import com.example.miniproyecto_sudoku.model.move.SudokuMove;
 
 import java.io.Serializable;
-import java.util.ArrayDeque;
+import java.util.LinkedList;
 import java.util.Deque;
 
 public class SudokuBoard implements ISudokuBoard, Serializable {
@@ -24,7 +24,7 @@ public class SudokuBoard implements ISudokuBoard, Serializable {
     public SudokuBoard() {
         this.grid = new int[SIZE][SIZE];
         this.fixed = new boolean[SIZE][SIZE];
-        this.moveHistory = new ArrayDeque<>();
+        this.moveHistory = new LinkedList<>();
         this.gameState = SudokuGameState.IN_PROGRESS;
     }
 

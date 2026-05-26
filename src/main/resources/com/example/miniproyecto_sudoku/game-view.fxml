@@ -31,7 +31,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <ImageView fx:id="mainMenuButton" accessibleRole="BUTTON" fitHeight="51.0" fitWidth="48.0" layoutX="530.0" layoutY="110.0" onMouseClicked="#handleMenu" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="mainMenuButton" accessibleRole="BUTTON" fitHeight="51.0" fitWidth="48.0" layoutX="530.0" layoutY="110.0" onMousePressed="#handleMenu" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/mainMenu.png" />
          </image>
