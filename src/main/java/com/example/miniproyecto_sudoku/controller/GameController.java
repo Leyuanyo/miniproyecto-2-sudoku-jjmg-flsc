@@ -116,6 +116,7 @@ public class GameController {
 
     private void buildBoard() {
         gameGrid.getChildren().clear();
+        gameGrid.setFocusTraversable(false);
         for (int row = 0; row < 6; row++) {
             for (int col = 0; col < 6; col++) {
                 TextField tf = new TextField();
@@ -140,6 +141,7 @@ public class GameController {
                     int value = board.getCell(row, col);
                     tf.setText(String.valueOf(value));
                     tf.setEditable(false);
+                    tf.setFocusTraversable(false);
                     tf.setStyle(
                             "-fx-border-color: #3D2B1F; " +
                                     "-fx-border-width: " + borderTop + " " + borderRight + " " + borderBottom + " " + borderLeft + "; " +
@@ -165,7 +167,10 @@ public class GameController {
                         selectedCol = c;
                         keyAdapter.setSelectedCell(r, c);
                         highlightSelectedCell(r, c);
+                        tf.requestFocus();
                     });
+
+                    tf.setOnKeyPressed(keyAdapter::handle);
                 }
 
                 cells[row][col] = tf;
