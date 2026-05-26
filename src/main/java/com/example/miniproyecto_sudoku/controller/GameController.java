@@ -1,5 +1,13 @@
 package com.example.miniproyecto_sudoku.controller;
 
+import com.example.miniproyecto_sudoku.controller.adapter.SudokuKeyAdapter;
+import com.example.miniproyecto_sudoku.model.board.SudokuBoard;
+import com.example.miniproyecto_sudoku.model.generator.ISudokuBoardGenerator;
+import com.example.miniproyecto_sudoku.model.generator.SudokuBoardGenerator;
+import com.example.miniproyecto_sudoku.model.session.ISudokuGameSession;
+import com.example.miniproyecto_sudoku.model.session.SudokuGameSession;
+import com.example.miniproyecto_sudoku.model.validator.ISudokuValidator;
+import com.example.miniproyecto_sudoku.model.validator.SudokuValidator;
 import com.example.miniproyecto_sudoku.view.GameStage;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -22,18 +30,40 @@ public class GameController {
 
     private TextField[][] cells = new TextField[6][6];
 
+    private SudokuBoard board;
+    private final ISudokuBoardGenerator boardGenerator;
+    private final ISudokuGameSession gameSession;
+    private ISudokuValidator validator;
+    private final SudokuKeyAdapter keyAdapter;
+
+    private int selectedRow = -1;
+    private int selectedCol = -1;
+
+    public GameController() {
+        this.boardGenerator = new SudokuBoardGenerator();
+        this.gameSession = new SudokuGameSession();
+        this.keyAdapter = new SudokuKeyAdapter();
+    }
+
     @FXML
     public void initialize() {
+        board = boardGenerator.generateBoard();
+        validator = new SudokuValidator(board);
+        keyAdapter.setOnInput(this::processInput);
+        keyAdapter.setOnClear(this::processClear);
+        GameStage.getPrimaryStage()
+                .getScene()
+                .setOnKeyPressed(keyAdapter);
         buildBoard();
     }
 
     @FXML
     void handleHint(MouseEvent event) {
-
     }
 
     @FXML
     void handleMenu(MouseEvent event) {
+        gameSession.saveSession(board);
         GameStage.loadScene("main-menu-view.fxml");
     }
 
@@ -67,5 +97,11 @@ public class GameController {
                 gameGrid.add(tf, col, row);
             }
         }
+    }
+
+    private void processInput(int row, int col, int value) {
+    }
+
+    private void processClear(int row, int col) {
     }
 }
