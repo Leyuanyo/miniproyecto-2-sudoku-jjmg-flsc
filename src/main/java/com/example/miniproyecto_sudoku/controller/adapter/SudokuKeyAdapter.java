@@ -35,13 +35,34 @@ public class SudokuKeyAdapter implements EventHandler<KeyEvent>, ISudokuCellInpu
 
     @Override
     public void handle(KeyEvent event) {
+        if (selectedRow == -1 || selectedCol == -1) return;
+
+        String key = event.getText();
+
+        switch (event.getCode()) {
+            case BACK_SPACE:
+            case DELETE:
+                handleClear(selectedRow, selectedCol);
+                break;
+            default:
+                if (key.matches("[1-6]")) {
+                    handleInput(selectedRow, selectedCol, Integer.parseInt(key));
+                }
+                break;
+        }
     }
 
     @Override
     public void handleInput(int row, int col, int value) {
+        if (onInput != null) {
+            onInput.accept(row, col, value);
+        }
     }
 
     @Override
     public void handleClear(int row, int col) {
+        if (onClear != null) {
+            onClear.accept(row, col);
+        }
     }
 }
