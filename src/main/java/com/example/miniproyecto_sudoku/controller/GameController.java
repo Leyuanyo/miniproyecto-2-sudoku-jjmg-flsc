@@ -93,10 +93,53 @@ public class GameController {
                                 "-fx-alignment: center;"
                 );
 
+                if (board.isFixed(row, col)) {
+                    int value = board.getCell(row, col);
+                    tf.setText(String.valueOf(value));
+                    tf.setEditable(false);
+                    tf.setStyle(
+                            "-fx-border-color: #3D2B1F; " +
+                                    "-fx-border-width: " + borderTop + " " + borderRight + " " + borderBottom + " " + borderLeft + "; " +
+                                    "-fx-background-color: #C4A882; " +
+                                    "-fx-font-size: 20px; " +
+                                    "-fx-alignment: center; " +
+                                    "-fx-font-weight: bold;"
+                    );
+                } else {
+                    final int r = row;
+                    final int c = col;
+                    tf.setEditable(false);
+                    tf.setOnMouseClicked(event -> {
+                        selectedRow = r;
+                        selectedCol = c;
+                        keyAdapter.setSelectedCell(r, c);
+                        highlightSelectedCell(r, c);
+                    });
+                }
+
                 cells[row][col] = tf;
                 gameGrid.add(tf, col, row);
             }
         }
+    }
+
+    private void highlightSelectedCell(int row, int col) {
+        for (int r = 0; r < 6; r++) {
+            for (int c = 0; c < 6; c++) {
+                if (!board.isFixed(r, c)) {
+                    cells[r][c].setStyle(
+                            cells[r][c].getStyle()
+                                    .replace("-fx-background-color: #C8E6C9; ",
+                                            "-fx-background-color: #EAD9B5; ")
+                    );
+                }
+            }
+        }
+        cells[row][col].setStyle(
+                cells[row][col].getStyle()
+                        .replace("-fx-background-color: #EAD9B5; ",
+                                "-fx-background-color: #C8E6C9; ")
+        );
     }
 
     private void processInput(int row, int col, int value) {
