@@ -234,4 +234,10 @@ public class GameController {
             GameStage.loadScene("win-view.fxml");
         }
     }
+
+    public void loadSession(SudokuBoard savedBoard) {
+        this.board = savedBoard;
+        this.validator = new SudokuValidator(board);
+        buildBoard();
+    }
 }
