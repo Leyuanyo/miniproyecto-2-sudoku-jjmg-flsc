@@ -19,14 +19,22 @@ import javafx.scene.layout.GridPane;
 
 public class GameController {
 
-    @FXML private GridPane gameGrid;
-    @FXML private ImageView hintButton;
-    @FXML private Label hintLabel;
-    @FXML private ImageView mainMenuButton;
-    @FXML private Label menuLabel;
-    @FXML private ImageView thinkingCatImageView;
-    @FXML private ImageView undoButton;
-    @FXML private Label undoLabel;
+    @FXML
+    private GridPane gameGrid;
+    @FXML
+    private ImageView hintButton;
+    @FXML
+    private Label hintLabel;
+    @FXML
+    private ImageView mainMenuButton;
+    @FXML
+    private Label menuLabel;
+    @FXML
+    private ImageView thinkingCatImageView;
+    @FXML
+    private ImageView undoButton;
+    @FXML
+    private Label undoLabel;
 
     private TextField[][] cells = new TextField[6][6];
 
@@ -80,9 +88,9 @@ public class GameController {
                 tf.setPrefHeight(70);
                 tf.setAlignment(Pos.CENTER);
 
-                String borderTop    = (row == 0) ? "3px" : "0.5px";
-                String borderLeft   = (col == 0) ? "3px" : "0.5px";
-                String borderRight  = (col == 2 || col == 5) ? "3px" : "0.5px";
+                String borderTop = (row == 0) ? "3px" : "0.5px";
+                String borderLeft = (col == 0) ? "3px" : "0.5px";
+                String borderRight = (col == 2 || col == 5) ? "3px" : "0.5px";
                 String borderBottom = (row == 1 || row == 3 || row == 5) ? "3px" : "0.5px";
 
                 tf.setStyle(
@@ -151,8 +159,44 @@ public class GameController {
     }
 
     private void processInput(int row, int col, int value) {
+        if (board.isFixed(row, col)) return;
+
+        board.setCell(row, col, value);
+        cells[row][col].setText(String.valueOf(value));
+
+        if (!validator.isMoveValid(row, col, value)) {
+            cells[row][col].setStyle(
+                    cells[row][col].getStyle()
+                            .replace("-fx-background-color: #EAD9B5; ",
+                                    "-fx-background-color: #FFCDD2; ")
+                            .replace("-fx-background-color: #C8E6C9; ",
+                                    "-fx-background-color: #FFCDD2; ")
+            );
+        } else {
+            cells[row][col].setStyle(
+                    cells[row][col].getStyle()
+                            .replace("-fx-background-color: #FFCDD2; ",
+                                    "-fx-background-color: #C8E6C9; ")
+            );
+            checkGameComplete();
+        }
     }
 
     private void processClear(int row, int col) {
+        if (board.isFixed(row, col)) return;
+        board.setCell(row, col, 0);
+        cells[row][col].setText("");
+        cells[row][col].setStyle(
+                cells[row][col].getStyle()
+                        .replace("-fx-background-color: #FFCDD2; ",
+                                "-fx-background-color: #EAD9B5; ")
+        );
+    }
+
+    private void checkGameComplete() {
+        if (validator.isBoardComplete()) {
+            gameSession.clearSession();
+            GameStage.loadScene("win-view.fxml");
+        }
     }
 }
