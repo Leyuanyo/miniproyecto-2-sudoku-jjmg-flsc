@@ -71,21 +71,20 @@ public class GameController {
         for (int row = 0; row < SudokuBoard.SIZE; row++) {
             for (int col = 0; col < SudokuBoard.SIZE; col++) {
                 if (board.getCell(row, col) == 0) {
-                    for (int num = 1; num <= SudokuBoard.SIZE; num++) {
-                        if (validator.isMoveValid(row, col, num)) {
-                            board.setCell(row, col, num);
-                            cells[row][col].setText(String.valueOf(num));
-                            cells[row][col].setStyle(
-                                    cells[row][col].getStyle()
-                                            .replace("-fx-background-color: #EAD9B5; ",
-                                                    "-fx-background-color: #B3E5FC; ")
-                            );
-                            hintLabel.setText("Sugerencia en ("
-                                    + (row + 1) + "," + (col + 1) + ")");
-                            checkGameComplete();
-                            return;
-                        }
-                    }
+                    int hint = board.getSolutionValue(row, col);
+                    board.setCell(row, col, hint);
+                    cells[row][col].setText(String.valueOf(hint));
+                    cells[row][col].setStyle(
+                            cells[row][col].getStyle()
+                                    .replace("-fx-background-color: #EAD9B5; ",
+                                            "-fx-background-color: #B3E5FC; ")
+                                    .replace("-fx-background-color: #C8E6C9; ",
+                                            "-fx-background-color: #B3E5FC; ")
+                    );
+                    hintLabel.setText("Sugerencia en ("
+                            + (row + 1) + "," + (col + 1) + ")");
+                    checkGameComplete();
+                    return;
                 }
             }
         }
