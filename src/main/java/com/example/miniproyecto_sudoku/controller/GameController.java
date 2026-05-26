@@ -1,6 +1,7 @@
 package com.example.miniproyecto_sudoku.controller;
 
 import com.example.miniproyecto_sudoku.controller.adapter.SudokuKeyAdapter;
+import com.example.miniproyecto_sudoku.model.move.SudokuMove;
 import com.example.miniproyecto_sudoku.model.board.SudokuBoard;
 import com.example.miniproyecto_sudoku.model.generator.ISudokuBoardGenerator;
 import com.example.miniproyecto_sudoku.model.generator.SudokuBoardGenerator;
@@ -67,6 +68,28 @@ public class GameController {
 
     @FXML
     void handleHint(MouseEvent event) {
+        for (int row = 0; row < SudokuBoard.SIZE; row++) {
+            for (int col = 0; col < SudokuBoard.SIZE; col++) {
+                if (board.getCell(row, col) == 0) {
+                    for (int num = 1; num <= SudokuBoard.SIZE; num++) {
+                        if (validator.isMoveValid(row, col, num)) {
+                            board.setCell(row, col, num);
+                            cells[row][col].setText(String.valueOf(num));
+                            cells[row][col].setStyle(
+                                    cells[row][col].getStyle()
+                                            .replace("-fx-background-color: #EAD9B5; ",
+                                                    "-fx-background-color: #B3E5FC; ")
+                            );
+                            hintLabel.setText("Sugerencia en ("
+                                    + (row + 1) + "," + (col + 1) + ")");
+                            checkGameComplete();
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+        hintLabel.setText("Sin sugerencias");
     }
 
     @FXML
@@ -77,6 +100,18 @@ public class GameController {
 
     @FXML
     void handleUndo(MouseEvent event) {
+        SudokuMove undone = board.undoLastMove();
+        if (undone != null) {
+            int row = undone.getRow();
+            int col = undone.getCol();
+            int prev = undone.getPreviousValue();
+            cells[row][col].setText(prev != 0 ? String.valueOf(prev) : "");
+            cells[row][col].setStyle(
+                    cells[row][col].getStyle()
+                            .replace("-fx-background-color: #FFCDD2; ",
+                                    "-fx-background-color: #EAD9B5; ")
+            );
+        }
     }
 
     private void buildBoard() {
