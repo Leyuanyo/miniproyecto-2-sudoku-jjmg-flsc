@@ -7,14 +7,38 @@ import com.example.miniproyecto_sudoku.model.board.SudokuBoard;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Class responsible for validating Sudoku rules and board states.
+ * Provides methods for validating rows, columns, blocks,
+ * moves, and determining the current game state.
+ *
+ * @author Juan José Morera Gómez
+ * @author Frank Leonardo Silva Castillo
+ * @version 1.0
+ * @since 1.0
+ */
 public class SudokuValidator implements ISudokuValidator {
 
+    /**
+     * Sudoku board used for validation operations.
+     */
     private final ISudokuBoard board;
 
+    /**
+     * Creates a new SudokuValidator associated with a board.
+     *
+     * @param board Sudoku board to validate.
+     */
     public SudokuValidator(ISudokuBoard board) {
         this.board = board;
     }
 
+    /**
+     * Determines whether a specific row satisfies Sudoku rules.
+     *
+     * @param row row index to validate.
+     * @return true if the row is valid, otherwise false.
+     */
     @Override
     public boolean isRowValid(int row) {
         Set<Integer> seen = new HashSet<>();
@@ -25,6 +49,12 @@ public class SudokuValidator implements ISudokuValidator {
         return true;
     }
 
+    /**
+     * Determines whether a specific column satisfies Sudoku rules.
+     *
+     * @param col column index to validate.
+     * @return true if the column is valid, otherwise false.
+     */
     @Override
     public boolean isColumnValid(int col) {
         Set<Integer> seen = new HashSet<>();
@@ -35,6 +65,13 @@ public class SudokuValidator implements ISudokuValidator {
         return true;
     }
 
+    /**
+     * Determines whether a specific block satisfies Sudoku rules.
+     *
+     * @param row row index belonging to the block.
+     * @param col column index belonging to the block.
+     * @return true if the block is valid, otherwise false.
+     */
     @Override
     public boolean isBlockValid(int row, int col) {
         Set<Integer> seen = new HashSet<>();
@@ -50,6 +87,14 @@ public class SudokuValidator implements ISudokuValidator {
         return true;
     }
 
+    /**
+     * Determines whether a move is valid according to Sudoku rules.
+     *
+     * @param row row index of the selected cell.
+     * @param col column index of the selected cell.
+     * @param value value to validate.
+     * @return true if the move is valid, otherwise false.
+     */
     @Override
     public boolean isMoveValid(int row, int col, int value) {
         if (value < 1 || value > SudokuBoard.SIZE) return false;
@@ -70,6 +115,12 @@ public class SudokuValidator implements ISudokuValidator {
         return valid;
     }
 
+    /**
+     * Determines whether the Sudoku board is completely solved
+     * and satisfies all validation rules.
+     *
+     * @return true if the board is complete and valid, otherwise false.
+     */
     @Override
     public boolean isBoardComplete() {
         for (int row = 0; row < SudokuBoard.SIZE; row++) {
@@ -90,6 +141,11 @@ public class SudokuValidator implements ISudokuValidator {
         return true;
     }
 
+    /**
+     * Evaluates and updates the current state of the Sudoku game.
+     *
+     * @return current SudokuGameState after evaluation.
+     */
     public SudokuGameState evaluateGameState() {
         if (isBoardComplete()) {
             board.setGameState(SudokuGameState.COMPLETED);

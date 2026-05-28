@@ -1,0 +1,11 @@
+module:com.example.miniproyecto_sudoku
+com.example.miniproyecto_sudoku
+com.example.miniproyecto_sudoku.controller
+com.example.miniproyecto_sudoku.controller.adapter
+com.example.miniproyecto_sudoku.model
+com.example.miniproyecto_sudoku.model.board
+com.example.miniproyecto_sudoku.model.generator
+com.example.miniproyecto_sudoku.model.move
+com.example.miniproyecto_sudoku.model.session
+com.example.miniproyecto_sudoku.model.validator
+com.example.miniproyecto_sudoku.view

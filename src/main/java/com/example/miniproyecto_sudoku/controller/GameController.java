@@ -18,48 +18,130 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
+/**
+ * Controller responsible for managing the Sudoku game view and its interactions.
+ * Handles board generation, user input, hints, undo actions, session management,
+ * and game validation.
+ *
+ * @author Juan José Morera Gómez
+ * @author Frank Leonardo Silva Castillo
+ * @version 1.0
+ * @since 1.0
+ */
 public class GameController {
 
+    /**
+     * GridPane that contains the Sudoku board cells.
+     */
     @FXML
     private GridPane gameGrid;
+
+    /**
+     * Button used to request a hint.
+     */
     @FXML
     private ImageView hintButton;
+
+    /**
+     * Label used to display hint information.
+     */
     @FXML
     private Label hintLabel;
+
+    /**
+     * Button used to return to the main menu.
+     */
     @FXML
     private ImageView mainMenuButton;
+
+    /**
+     * Label associated with the menu button.
+     */
     @FXML
     private Label menuLabel;
+
+    /**
+     * ImageView displaying the thinking cat image.
+     */
     @FXML
     private ImageView thinkingCatImageView;
+
+    /**
+     * Button used to undo the last move.
+     */
     @FXML
     private ImageView undoButton;
+
+    /**
+     * Label associated with the undo button.
+     */
     @FXML
     private Label undoLabel;
 
+    /**
+     * Matrix containing all Sudoku board cells.
+     */
     private TextField[][] cells = new TextField[6][6];
 
+    /**
+     * Current Sudoku board instance.
+     */
     private SudokuBoard board;
+
+    /**
+     * Generator responsible for creating Sudoku boards.
+     */
     private final ISudokuBoardGenerator boardGenerator;
+
+    /**
+     * Manages the current game session.
+     */
     private final ISudokuGameSession gameSession;
+
+    /**
+     * Validator used to verify Sudoku rules and completion state.
+     */
     private ISudokuValidator validator;
+
+    /**
+     * Adapter responsible for keyboard input handling.
+     */
     private final SudokuKeyAdapter keyAdapter;
 
+    /**
+     * Row index of the currently selected cell.
+     */
     private int selectedRow = -1;
+
+    /**
+     * Column index of the currently selected cell.
+     */
     private int selectedCol = -1;
 
+    /**
+     * Creates a new GameController with initialized game components.
+     */
     public GameController() {
         this.boardGenerator = new SudokuBoardGenerator();
         this.gameSession = new SudokuGameSession();
         this.keyAdapter = new SudokuKeyAdapter();
     }
 
+    /**
+     * Initializes the controller and configures input handlers.
+     */
     @FXML
     public void initialize() {
         keyAdapter.setOnInput(this::processInput);
         keyAdapter.setOnClear(this::processClear);
     }
 
+    /**
+     * Handles the hint button action by revealing the solution value
+     * for the first empty cell found on the board.
+     *
+     * @param event mouse event triggered by the hint button.
+     */
     @FXML
     void handleHint(MouseEvent event) {
         for (int row = 0; row < SudokuBoard.SIZE; row++) {
@@ -85,12 +167,23 @@ public class GameController {
         hintLabel.setText("Sin Pistas");
     }
 
+    /**
+     * Handles the action of returning to the main menu.
+     * Saves the current session before changing the scene.
+     *
+     * @param event mouse event triggered by the menu button.
+     */
     @FXML
     void handleMenu(MouseEvent event) {
         gameSession.saveSession(board);
         GameStage.loadScene("main-menu-view.fxml");
     }
 
+    /**
+     * Handles the undo action by restoring the previous board state.
+     *
+     * @param event mouse event triggered by the undo button.
+     */
     @FXML
     void handleUndo(MouseEvent event) {
         SudokuMove undone = board.undoLastMove();
@@ -109,6 +202,10 @@ public class GameController {
         }
     }
 
+    /**
+     * Builds and configures the visual Sudoku board.
+     * Creates all cells, applies styles, and assigns event handlers.
+     */
     private void buildBoard() {
         gameGrid.getChildren().clear();
         gameGrid.setFocusTraversable(false);
@@ -179,6 +276,13 @@ public class GameController {
         }
     }
 
+    /**
+     * Highlights the currently selected cell and restores
+     * the style of all other editable cells.
+     *
+     * @param row row of the selected cell.
+     * @param col column of the selected cell.
+     */
     private void highlightSelectedCell(int row, int col) {
         for (int r = 0; r < 6; r++) {
             for (int c = 0; c < 6; c++) {
@@ -198,6 +302,14 @@ public class GameController {
         );
     }
 
+    /**
+     * Processes a value entered by the user into a cell.
+     * Updates the board, validates the move, and changes the cell style.
+     *
+     * @param row row of the selected cell.
+     * @param col column of the selected cell.
+     * @param value value entered by the user.
+     */
     private void processInput(int row, int col, int value) {
         if (board.isFixed(row, col)) return;
 
@@ -222,6 +334,12 @@ public class GameController {
         }
     }
 
+    /**
+     * Clears the value of a selected cell and restores its default style.
+     *
+     * @param row row of the selected cell.
+     * @param col column of the selected cell.
+     */
     private void processClear(int row, int col) {
         if (board.isFixed(row, col)) return;
         board.setCell(row, col, 0);
@@ -235,6 +353,10 @@ public class GameController {
         );
     }
 
+    /**
+     * Checks whether the Sudoku board has been completed successfully.
+     * If completed, clears the current session and loads the win scene.
+     */
     private void checkGameComplete() {
         if (validator.isBoardComplete()) {
             gameSession.clearSession();
@@ -242,12 +364,21 @@ public class GameController {
         }
     }
 
+    /**
+     * Starts a new Sudoku game by generating a new board
+     * and rebuilding the visual interface.
+     */
     public void startNewGame() {
         board = boardGenerator.generateBoard();
         validator = new SudokuValidator(board);
         buildBoard();
     }
 
+    /**
+     * Loads a previously saved Sudoku session and rebuilds the board view.
+     *
+     * @param savedBoard saved Sudoku board to restore.
+     */
     public void loadSession(SudokuBoard savedBoard) {
         this.board = savedBoard;
         this.validator = new SudokuValidator(board);

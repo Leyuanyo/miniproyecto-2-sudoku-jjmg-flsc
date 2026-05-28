@@ -10,13 +10,44 @@ import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
 
+/**
+ * Class responsible for generating valid Sudoku boards.
+ * Creates solved Sudoku grids and assigns fixed cells
+ * to initialize playable game boards.
+ *
+ * @author Juan José Morera Gómez
+ * @author Frank Leonardo Silva Castillo
+ * @version 1.0
+ * @since 1.0
+ */
 public class SudokuBoardGenerator implements ISudokuBoardGenerator {
 
+    /**
+     * Size of the Sudoku board.
+     */
     private static final int SIZE = SudokuBoard.SIZE;
+
+    /**
+     * Number of rows per Sudoku block.
+     */
     private static final int BLOCK_ROWS = SudokuBoard.BLOCK_ROWS;
+
+    /**
+     * Number of columns per Sudoku block.
+     */
     private static final int BLOCK_COLS = SudokuBoard.BLOCK_COLS;
+
+    /**
+     * Number of fixed cells assigned per block.
+     */
     private static final int FIXED_PER_BLOCK = 2;
 
+    /**
+     * Generates a new Sudoku board with a valid solution
+     * and predefined fixed cells.
+     *
+     * @return generated SudokuBoard instance.
+     */
     @Override
     public SudokuBoard generateBoard() {
         int[][] solvedGrid = buildSolvedGrid();
@@ -26,6 +57,12 @@ public class SudokuBoardGenerator implements ISudokuBoardGenerator {
         return board;
     }
 
+    /**
+     * Builds a fully solved Sudoku grid using
+     * an iterative backtracking approach.
+     *
+     * @return solved Sudoku grid.
+     */
     private int[][] buildSolvedGrid() {
         int[][] grid = new int[SIZE][SIZE];
         Deque<ISudokuBoardState> stack = new ArrayDeque<>();
@@ -59,6 +96,12 @@ public class SudokuBoardGenerator implements ISudokuBoardGenerator {
         return grid;
     }
 
+    /**
+     * Creates a deep copy of a Sudoku grid.
+     *
+     * @param original original grid to copy.
+     * @return copied grid.
+     */
     private int[][] deepCopy(int[][] original) {
         int[][] copy = new int[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++) {
@@ -67,6 +110,15 @@ public class SudokuBoardGenerator implements ISudokuBoardGenerator {
         return copy;
     }
 
+    /**
+     * Generates a shuffled list of valid candidate numbers
+     * for a specific cell position.
+     *
+     * @param grid current Sudoku grid.
+     * @param row row index of the cell.
+     * @param col column index of the cell.
+     * @return shuffled list of valid candidate numbers.
+     */
     private List<Integer> getShuffledCandidates(int[][] grid, int row, int col) {
         boolean[] used = new boolean[SIZE + 1];
 
@@ -90,6 +142,13 @@ public class SudokuBoardGenerator implements ISudokuBoardGenerator {
         return candidates;
     }
 
+    /**
+     * Places fixed cells into the generated Sudoku board
+     * using values from the solved grid.
+     *
+     * @param board Sudoku board where fixed cells will be assigned.
+     * @param solvedGrid solved Sudoku grid containing valid values.
+     */
     private void placeFixedCells(SudokuBoard board, int[][] solvedGrid) {
         for (int blockRow = 0; blockRow < SIZE / BLOCK_ROWS; blockRow++) {
             for (int blockCol = 0; blockCol < SIZE / BLOCK_COLS; blockCol++) {

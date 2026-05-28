@@ -7,17 +7,40 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 
+/**
+ * Controller responsible for managing the "How To Play" view.
+ * Configures the instructions interface and handles keyboard events
+ * for returning to the main menu.
+ *
+ * @author Juan José Morera Gómez
+ * @author Frank Leonardo Silva Castillo
+ * @version 1.0
+ * @since 1.0
+ */
 public class HowToPlayController {
 
+    /**
+     * Label used to display the exit instruction.
+     */
     @FXML
     private Label howToPlayExitLabel;
 
+    /**
+     * Label used as the title of the "How To Play" view.
+     */
     @FXML
     private Label howToPlayLabel;
 
+    /**
+     * Text area containing the game instructions.
+     */
     @FXML
     private TextArea howToPlayTextArea;
 
+    /**
+     * Initializes the controller, configures the text area style,
+     * and registers the ESC key event to return to the main menu.
+     */
     @FXML
     public void initialize() {
         howToPlayTextArea.setStyle(
