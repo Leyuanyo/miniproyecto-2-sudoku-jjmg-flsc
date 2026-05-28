@@ -103,6 +103,8 @@ public class GameController {
                     cells[row][col].getStyle()
                             .replace("-fx-background-color: #FFCDD2; ",
                                     "-fx-background-color: #EAD9B5; ")
+                            .replace("-fx-background-color: #B3E5FC; ",
+                                    "-fx-background-color: #EAD9B5; ")
             );
         }
     }
