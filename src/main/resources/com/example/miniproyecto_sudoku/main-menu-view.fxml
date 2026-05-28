@@ -2,19 +2,38 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Blend?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2C2416;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.miniproyecto_sudoku.controller.MainMenuController">
    <children>
-      <Label layoutX="253.0" layoutY="67.0" text="SUDOKU" />
-      <Button layoutX="450.0" layoutY="174.0" mnemonicParsing="false" text="JUGAR" />
-      <Button layoutX="428.0" layoutY="210.0" mnemonicParsing="false" text="CÓMO JUGAR?" />
-      <ImageView fitHeight="272.0" fitWidth="261.0" layoutX="72.0" layoutY="114.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="100.0" arcWidth="100.0" fill="#f5edd6" height="312.0" layoutX="129.0" layoutY="44.0" stroke="BLACK" strokeLineCap="ROUND" strokeLineJoin="ROUND" strokeType="INSIDE" width="342.0" />
+      <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="172.0" layoutY="56.0" prefHeight="91.0" prefWidth="255.0" text="Sudoku" textAlignment="CENTER" textFill="#7b4f2e">
+         <font>
+            <Font name="Berlin Sans FB" size="72.0" />
+         </font>
+         <effect>
+            <Blend />
+         </effect>
+      </Label>
+      <Button fx:id="playButton" layoutX="257.0" layoutY="175.0" mnemonicParsing="false" onAction="#handlePlay" style="-fx-background-color: #D4B896; -fx-text-fill: #3D2B1F; -fx-font-size: 14px; -fx-cursor: hand; -fx-background-radius: 8; -fx-font-family: &quot;Berlin Sans FB&quot;; -fx-font-size: 20px;" text="JUGAR">
+         <font>
+            <Font name="Berlin Sans FB Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="howToPlayButton" layoutX="222.0" layoutY="265.0" mnemonicParsing="false" onAction="#handleHowToPlay" style="-fx-background-color: #D4B896; -fx-text-fill: #3D2B1F; -fx-font-size: 14px; -fx-cursor: hand; -fx-background-radius: 8; -fx-font-family: &quot;Berlin Sans FB&quot;; -fx-font-size: 20px;" text="COMO JUGAR?" />
+      <Button fx:id="continueGameButton" layoutX="190.0" layoutY="220.0" mnemonicParsing="false" onAction="#handleContinueGame" style="-fx-background-color: #D4B896; -fx-text-fill: #3D2B1F; -fx-font-size: 14px; -fx-cursor: hand; -fx-background-radius: 8; -fx-font-family: &quot;Berlin Sans FB&quot;; -fx-font-size: 20px;" text="CONTINUAR PARTIDA" />
+      <ImageView fitHeight="228.0" fitWidth="154.0" layoutX="446.0" layoutY="247.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../Downloads/images.jpg" />
+            <Image url="@images/nerdCat2.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="190.0" fitWidth="255.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/nerdCat1.png" />
          </image>
       </ImageView>
    </children>
