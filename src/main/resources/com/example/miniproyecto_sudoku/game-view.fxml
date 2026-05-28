@@ -31,12 +31,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
       </GridPane>
-      <ImageView fx:id="mainMenuButton" accessibleRole="BUTTON" fitHeight="51.0" fitWidth="48.0" layoutX="530.0" layoutY="110.0" onMousePressed="#handleMenu" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="mainMenuButton" accessibleRole="BUTTON" fitHeight="51.0" fitWidth="48.0" layoutX="534.0" layoutY="110.0" onMousePressed="#handleMenu" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/mainMenu.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="undoButton" accessibleRole="BUTTON" fitHeight="51.0" fitWidth="48.0" layoutX="450.0" layoutY="107.0" onMouseClicked="#handleUndo" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="undoButton" accessibleRole="BUTTON" fitHeight="51.0" fitWidth="48.0" layoutX="454.0" layoutY="107.0" onMouseClicked="#handleUndo" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/undo.png" />
          </image>
@@ -51,17 +51,17 @@
             <Image url="@images/thinkingCat.png" />
          </image>
       </ImageView>
-      <Label fx:id="menuLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="515.0" layoutY="151.0" prefHeight="46.0" prefWidth="78.0" text="Menu" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="menuLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="519.0" layoutY="151.0" prefHeight="46.0" prefWidth="78.0" text="Menu" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="hintLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="363.0" layoutY="155.0" prefHeight="36.0" prefWidth="78.0" text="Pista" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="hintLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="357.0" layoutY="155.0" prefHeight="36.0" prefWidth="90.0" text="Pista" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="undoLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="435.0" layoutY="155.0" prefHeight="36.0" prefWidth="78.0" text="Volver" textAlignment="CENTER" wrapText="true">
+      <Label fx:id="undoLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="439.0" layoutY="155.0" prefHeight="36.0" prefWidth="78.0" text="Volver" textAlignment="CENTER" wrapText="true">
          <font>
             <Font name="Berlin Sans FB" size="18.0" />
          </font>

@@ -22,7 +22,7 @@ public class GameStage {
         primaryStage.setResizable(false);
         primaryStage.getIcons().add(
                 new Image(GameStage.class.getResourceAsStream(
-                        "/com/example/miniproyecto_sudoku/Images/game-icon.png"
+                        "/com/example/miniproyecto_sudoku/images/game-icon.png"
                 ))
         );
     }

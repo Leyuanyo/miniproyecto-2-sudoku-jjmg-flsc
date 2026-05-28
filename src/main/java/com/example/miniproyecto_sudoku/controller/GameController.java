@@ -75,14 +75,14 @@ public class GameController {
                                     .replace("-fx-background-color: #C8E6C9; ",
                                             "-fx-background-color: #B3E5FC; ")
                     );
-                    hintLabel.setText("Sugerencia en ("
+                    hintLabel.setText("Pista ("
                             + (row + 1) + "," + (col + 1) + ")");
                     checkGameComplete();
                     return;
                 }
             }
         }
-        hintLabel.setText("Sin sugerencias");
+        hintLabel.setText("Sin Pistas");
     }
 
     @FXML
@@ -229,6 +229,8 @@ public class GameController {
         cells[row][col].setStyle(
                 cells[row][col].getStyle()
                         .replace("-fx-background-color: #FFCDD2; ",
+                                "-fx-background-color: #EAD9B5; ")
+                        .replace("-fx-background-color: #B3E5FC; ",
                                 "-fx-background-color: #EAD9B5; ")
         );
     }
